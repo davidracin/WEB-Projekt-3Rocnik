@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\genre; // Import the genre controller
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/test', function () {
     return view('welcome');
 });
-Route::get('/genre', function () {
-    return view('genre');
-});
+Route::get('genre',  [genre::class, 'genre'])->name('genre'); // Define the route for the genre page
