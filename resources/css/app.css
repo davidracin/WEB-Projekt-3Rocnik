@@ -1,2 +1,21 @@
-@import  "tailwindcss";
-@source  "../views";
+/* Import Bootstrap CSS */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Custom styles below */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Fix for navbar positioning */
+.navbar {
+    margin-top: 0;
+    border-top: 0;
+    border-radius: 0;
+}
+
+/* Content padding */
+.container.mt-4 {
+    padding-top: 1rem;
+}
+

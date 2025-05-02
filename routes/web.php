@@ -14,7 +14,12 @@ use App\Http\Controllers\genre; // Import the genre controller
 |
 */
 
-Route::get('/test', function () {
+Route::get('/', function () {
     return view('welcome');
-});
-Route::get('genre',  [genre::class, 'genre'])->name('genre'); // Define the route for the genre page
+})->name('home');
+
+// Define the route for the genre page (both singular and plural forms)
+Route::get('/genre', [genre::class, 'genre'])->name('genre');
+Route::post('/delete-genre', [genre::class, 'deleteGenre'])->name('delete-genre');
+Route::post('/add-genre', [genre::class, 'addGenre'])->name('add-genre');
+Route::get('/genres', [genre::class, 'genre'])->name('genres');

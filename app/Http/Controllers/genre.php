@@ -7,13 +7,44 @@ use App\Models\genres; // Import the genre model
 
 class genre extends Controller
 {
+    var $genres;
+
+
+    public function __construct()
+    {
+        $this->genres = genres::all(); // Fetch all genres from the database
+    }
     public function genre()
     {
-        $genres = genres::all(); // Fetch all genres from the database
-
         return view('genre', [
-            'genres' => $genres // Pass the genres to the view
+            'genres' => $this->genres, // Pass the genres to the view
         ]);
+    }
+
+    public function deleteGenre(Request $request)
+    {
+        $genreId = $request->input('genre_id'); // Get the genre ID from the request
+
+        // Find the genre by ID and delete it
+        $genre = genres::find($genreId);
+        if ($genre) {
+            $genre->delete();
+            return redirect()->route('genres')->with('success', 'Genre deleted successfully.');
+        }
+
+        return redirect()->route('genres')->with('error', 'Genre not found.');
+    }
+
+    public function addGenre(Request $request)
+    {
+        $genreName = $request->input('genre_name'); // Get the genre name from the request
+
+        // Create a new genre
+        $genre = new genres();
+        $genre->name = $genreName;
+        $genre->save();
+
+        return redirect()->route('genres')->with('success', 'Genre added successfully.');
     }
 
 }
