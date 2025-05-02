@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\genre; // Import the genre controller
+use App\Http\Controllers\Genre; // Import the genre controller
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,8 @@ Route::get('/', function () {
 })->name('home');
 
 // Define the route for the genre page (both singular and plural forms)
-Route::get('/genre', [genre::class, 'genre'])->name('genre');
-Route::post('/delete-genre', [genre::class, 'deleteGenre'])->name('delete-genre');
-Route::post('/add-genre', [genre::class, 'addGenre'])->name('add-genre');
-Route::get('/genres', [genre::class, 'genre'])->name('genres');
+Route::get('/genre', [Genre::class, 'genre'])->name('genre');
+Route::post('/delete-genre', [Genre::class, 'deleteGenre'])->name('delete-genre');
+Route::post('/add-genre', [Genre::class, 'addGenre'])->name('add-genre');
+Route::post('/edit-genre', [Genre::class, 'editGenre'])->name('edit-genre');
+Route::get('/genres', [Genre::class, 'genre'])->name('genres');

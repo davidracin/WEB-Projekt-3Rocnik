@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\genres; // Import the genre model
 
-class genre extends Controller
+class Genre extends Controller
 {
     var $genres;
 
@@ -45,6 +45,22 @@ class genre extends Controller
         $genre->save();
 
         return redirect()->route('genres')->with('success', 'Genre added successfully.');
+    }
+
+    public function editGenre(Request $request)
+    {
+        $genreId = $request->input('genre_id'); // Get the genre ID from the request
+        $genreName = $request->input('genre_name'); // Get the genre name from the request
+
+        // Find the genre by ID and update it
+        $genre = genres::find($genreId);
+        if ($genre) {
+            $genre->name = $genreName;
+            $genre->save();
+            return redirect()->route('genres')->with('success', 'Genre updated successfully.');
+        }
+
+        return redirect()->route('genres')->with('error', 'Genre not found.');
     }
 
 }
