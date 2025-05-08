@@ -51,18 +51,3 @@
       </div>
     </div>
 @endsection
-
-@push('scripts')
-<script>
-function togglePassword(fieldId, btn) {
-    const input = document.getElementById(fieldId);
-    if (input.type === 'password') {
-        input.type = 'text';
-        btn.querySelector('.show-icon').textContent = '🙈';
-    } else {
-        input.type = 'password';
-        btn.querySelector('.show-icon').textContent = '👁️';
-    }
-}
-</script>
-@endpush

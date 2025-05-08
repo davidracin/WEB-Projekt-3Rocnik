@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'My Laravel App')</title>
-    <!-- Import Bootstrap via Vite -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
 </head>
 <body>
     <!-- Include navbar -->
@@ -15,5 +14,6 @@
     <div class="container">
         @yield('content')
     </div>
+    @vite(['resources/js/app.js'])
 </body>
 </html>
