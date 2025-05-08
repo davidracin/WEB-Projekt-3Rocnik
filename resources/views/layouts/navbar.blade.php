@@ -10,6 +10,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('genre*') ? 'active' : '' }}" href="{{ route('genre') }}">Genres</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('login') }}" class="nav-link {{ request()->is('login') ? 'active' : '' }}">Přihlášení</a>
+                </li>
             </ul>
         </div>
 </nav>

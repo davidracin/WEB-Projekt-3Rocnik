@@ -24,3 +24,11 @@ Route::post('/delete-genre', [Genre::class, 'deleteGenre'])->name('delete-genre'
 Route::post('/add-genre', [Genre::class, 'addGenre'])->name('add-genre');
 Route::post('/edit-genre', [Genre::class, 'editGenre'])->name('edit-genre');
 Route::get('/genres', [Genre::class, 'genre'])->name('genres');
+
+//Routes for the login and register pages
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
