@@ -35,9 +35,12 @@
                   @enderror
                 </div>
 
-                <div class="form-floating mb-4">
+                <div class="form-floating mb-4 position-relative">
                   <input type="password" id="password" name="password" class="form-control form-control-lg @error('password') is-invalid @enderror" required autocomplete="new-password" placeholder="Heslo" />
                   <label for="password">Heslo</label>
+                  <button type="button" class="btn btn-sm btn-secondary position-absolute top-50 end-0 translate-middle-y me-2" style="z-index:2;" onclick="togglePassword('password', this)">
+                    <span class="show-icon">👁️</span>
+                  </button>
                   @error('password')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -45,9 +48,12 @@
                   @enderror
                 </div>
 
-                <div class="form-floating mb-4">
+                <div class="form-floating mb-4 position-relative">
                   <input type="password" id="password-confirm" name="password_confirmation" class="form-control form-control-lg" required autocomplete="new-password" placeholder="Potvrdit heslo" />
                   <label for="password-confirm">Potvrdit heslo</label>
+                  <button type="button" class="btn btn-sm btn-secondary position-absolute top-50 end-0 translate-middle-y me-2" style="z-index:2;" onclick="togglePassword('password-confirm', this)">
+                    <span class="show-icon">👁️</span>
+                  </button>
                 </div>
 
                 <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Zaregistrovat se</button>
@@ -64,3 +70,18 @@
       </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+function togglePassword(fieldId, btn) {
+    const input = document.getElementById(fieldId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        btn.querySelector('.show-icon').textContent = '🙈';
+    } else {
+        input.type = 'password';
+        btn.querySelector('.show-icon').textContent = '👁️';
+    }
+}
+</script>
+@endpush
