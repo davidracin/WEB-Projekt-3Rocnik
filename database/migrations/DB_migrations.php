@@ -86,10 +86,6 @@ return new class extends Migration
             $table->unsignedBigInteger('books_id');
             $table->timestamps(); // Keep timestamps for tracking
         });
-
-
-
-
     }
 
     /**
@@ -97,6 +93,14 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('genre');
+        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('publisher_cities');
+        Schema::dropIfExists('publishers');
+        Schema::dropIfExists('genres');
+        Schema::dropIfExists('countries');
+        Schema::dropIfExists('book_has_genres');
+        Schema::dropIfExists('book_has_authors');
+        Schema::dropIfExists('books');
+        Schema::dropIfExists('authors');
     }
 };
