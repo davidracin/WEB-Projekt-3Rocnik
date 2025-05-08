@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Genre; // Import the genre controller
+use App\Http\Controllers\AuthController; // Import the auth controller
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,9 @@ Route::post('/edit-genre', [Genre::class, 'editGenre'])->name('edit-genre');
 Route::get('/genres', [Genre::class, 'genre'])->name('genres');
 
 //Routes for the login and register pages
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
