@@ -16,7 +16,7 @@ use App\Http\Controllers\AuthController; // Import the auth controller
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 })->name('home');
 
 // Define the route for the genre page (both singular and plural forms)
