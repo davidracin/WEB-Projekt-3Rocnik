@@ -55,7 +55,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Invalid credentials.',
+            'email' => 'Neplatné přihlašovací údaje.',
         ])->onlyInput('email');
     }
 
