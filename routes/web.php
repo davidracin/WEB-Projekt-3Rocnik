@@ -25,6 +25,7 @@ Route::get('/genre/admin', [Genre::class, 'genreAdmin'])->middleware('auth')->na
 Route::delete('/genre/delete', [Genre::class, 'deleteGenre'])->middleware('auth')->name('genreDelete');
 Route::post('/genre/add', [Genre::class, 'addGenre'])->middleware('auth')->name('genreAdd');
 Route::post('/genre/edit', [Genre::class, 'editGenre'])->middleware('auth')->name('genreEdit');
+Route::get('/genre/{id}', [Genre::class, 'genreId'])->middleware('auth')->name('genreId');
 
 //Routes for the login and register pages
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
