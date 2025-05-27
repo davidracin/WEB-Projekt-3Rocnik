@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\genres; // Import the genre model
+use App\Models\Genres; // Import the genre model
 
 class Genre extends Controller
 {
@@ -12,7 +12,7 @@ class Genre extends Controller
 
     public function __construct()
     {
-        $this->genres = genres::all(); // Fetch all genres from the database
+        $this->genres = Genres::all(); // Fetch all genres from the database
     }
     public function genre()
     {
@@ -33,7 +33,7 @@ class Genre extends Controller
         $genreId = $request->input('id'); // Get the genre ID from the request
 
         // Find the genre by ID and delete it
-        $genre = genres::find($genreId);
+        $genre = Genres::find($genreId);
         if ($genre) {
             $genre->delete();
             return redirect()->route('genreAdmin')->with('success', 'Genre deleted successfully.');
@@ -47,7 +47,7 @@ class Genre extends Controller
         $genreName = $request->input('id'); // Get the genre name from the request
 
         // Create a new genre
-        $genre = new genres();
+        $genre = new Genres();
         $genre->name = $genreName;
         $genre->save();
 
@@ -60,7 +60,7 @@ class Genre extends Controller
         $genreName = $request->input('genre_name'); // Get the genre name from the request
 
         // Find the genre by ID and update it
-        $genre = genres::find($genreId);
+        $genre = Genres::find($genreId);
         if ($genre) {
             $genre->name = $genreName;
             $genre->save();

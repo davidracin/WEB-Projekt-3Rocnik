@@ -1,23 +1,37 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <div class="container">
+        <a class="navbar-brand" href="{{ route('dashboard') }}">
+            <i class="fas fa-lock me-2"></i> Knihovna Online - Admin
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ route('dashboard') }}">Knihy</a>
+                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                        <i class="fas fa-tachometer-alt me-1"></i> Dashboard
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('genre/admin*') ? 'active' : '' }}" href="{{ route('genreAdmin') }}">Žánry</a>
+                    <a class="nav-link {{ request()->routeIs('genreAdmin') ? 'active' : '' }}" href="{{ route('genreAdmin') }}">
+                        <i class="fas fa-tags me-1"></i> Žánry
+                    </a>
                 </li>
             </ul>
-            <ul class="navbar-nav ms-auto d-flex flex-row">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('logout*') ? 'active' : '' }}" href="{{ route('logout') }}">Odhlásit se</a>
+                    <a class="nav-link" href="{{ route('books.index') }}">
+                        <i class="fas fa-arrow-left me-1"></i> Zpět na web
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="{{ route('logout') }}">
+                        <i class="fas fa-sign-out-alt me-1"></i> Odhlásit se
+                    </a>
                 </li>
             </ul>
-
-
         </div>
+    </div>
 </nav>

@@ -4,34 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Genres extends Model
+class Author extends Model
 {
     use HasFactory;
-    use SoftDeletes;
-    
+
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'genres';
-    
+    protected $table = 'authors';
+
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
     protected $primaryKey = 'id';
-    
-    /**
-     * Indicates if the model's ID is auto-incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = true;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -39,15 +31,17 @@ class Genres extends Model
      */
     protected $fillable = [
         'name',
+        'bio',
+        'profile_image'
     ];
-    
+
     /**
-     * Get the books that belong to the genre.
+     * Get the books for the author.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function books()
+    public function books(): BelongsToMany
     {
-        return $this->belongsToMany(Book::class, 'books_has_genres', 'genres_id', 'books_id');
+        return $this->belongsToMany(Book::class, 'books_has_authors', 'authors_id', 'books_id');
     }
 }

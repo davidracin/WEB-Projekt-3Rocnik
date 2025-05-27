@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Genre; // Import the genre controller
 use App\Http\Controllers\AuthController; // Import the auth controller
+use App\Http\Controllers\BookController; // Import the book controller
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,8 @@ use App\Http\Controllers\AuthController; // Import the auth controller
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-})->name('home');
+// Set books index as the home page
+Route::get('/', [BookController::class, 'index'])->name('home');
 
 // Define the route for the genre page (both singular and plural forms)
 Route::get('/genre', [Genre::class, 'genre'])->name('genre');
@@ -33,3 +33,9 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+
+// Book routes
+Route::get('/books', [BookController::class, 'index'])->name('books.index');
+Route::get('/books/search', [BookController::class, 'search'])->name('books.search');
+Route::get('/books/genre/{id}', [BookController::class, 'byGenre'])->name('books.by-genre');
+Route::get('/books/{id}', [BookController::class, 'show'])->name('books.show');

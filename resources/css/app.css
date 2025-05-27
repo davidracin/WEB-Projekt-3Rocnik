@@ -1,10 +1,20 @@
 /* Import Bootstrap CSS */
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
+/* Import custom component styles */
+@import 'books.css';
+
 /* Custom styles below */
 body {
     margin: 0;
     padding: 0;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* Navigation styles */
+.navbar-brand {
+    font-weight: bold;
 }
 
 /* Fix for navbar positioning */

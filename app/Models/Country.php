@@ -4,34 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Genres extends Model
+class Country extends Model
 {
     use HasFactory;
-    use SoftDeletes;
-    
+
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'genres';
-    
+    protected $table = 'countries';
+
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
     protected $primaryKey = 'id';
-    
-    /**
-     * Indicates if the model's ID is auto-incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = true;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -40,14 +32,14 @@ class Genres extends Model
     protected $fillable = [
         'name',
     ];
-    
+
     /**
-     * Get the books that belong to the genre.
+     * Get the publishing cities for the country.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function books()
+    public function publishingCities(): HasMany
     {
-        return $this->belongsToMany(Book::class, 'books_has_genres', 'genres_id', 'books_id');
+        return $this->hasMany(PublishingCity::class, 'countries_id');
     }
 }
