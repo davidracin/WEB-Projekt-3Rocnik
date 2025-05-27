@@ -18,7 +18,8 @@
                         @foreach ($genres as $genre)
                             <tr>
                                 <td>{{ $genre->name }}</td>
-                                <td></td>
+                                <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#del{{ $genre->id }}">Odstranit</button></td>
+                                <?php echo delete_modal('del'.$genre->id, $genre->id, 'Odstranit žánr', 'Opravdu chcete odstranit tento žánr?', 'delete') ?>
                             </tr>
                         @endforeach
                     </tbody>
