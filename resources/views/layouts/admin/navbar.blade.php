@@ -9,7 +9,7 @@
                     <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ route('dashboard') }}">Knihy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('genre/admin*') ? 'active' : '' }}" href="{{ route('genreAdmin') }}">Žánry</a>
+                    <a class="nav-link {{ request()->is('genre/admin*') ? 'active' : '' }}" href="{{ route('genreAdmin') }}">Genres</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto d-flex flex-row">

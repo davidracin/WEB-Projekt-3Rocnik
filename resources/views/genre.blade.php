@@ -20,7 +20,11 @@
                     <tbody>
                         @foreach ($genres as $genre)
                             <tr>
-                                <td>{{ $genre->name }}</td>
+                                <td>
+                                    <a href="{{ route('#', $genre->id) }}" class="text-decoration-none text-dark">
+                                        {{ $genre->name }}
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
