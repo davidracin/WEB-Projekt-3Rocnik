@@ -44,30 +44,30 @@ class Genre extends Controller
 
     public function addGenre(Request $request)
     {
-        $genreName = $request->input('id'); // Get the genre name from the request
+        $genreName = $request->input('name'); // Get the genre name from the request
 
         // Create a new genre
         $genre = new genres();
         $genre->name = $genreName;
         $genre->save();
 
-        return redirect()->route('genres')->with('success', 'Genre added successfully.');
+        return redirect()->route('genreAdmin')->with('success', 'Genre added successfully.');
     }
 
     public function editGenre(Request $request)
     {
-        $genreId = $request->input('genre_id'); // Get the genre ID from the request
-        $genreName = $request->input('genre_name'); // Get the genre name from the request
+        $genreId = $request->input('id'); // Get the genre ID from the request
+        $genreName = $request->input('name'); // Get the genre name from the request
 
         // Find the genre by ID and update it
         $genre = genres::find($genreId);
         if ($genre) {
             $genre->name = $genreName;
             $genre->save();
-            return redirect()->route('genres')->with('success', 'Genre updated successfully.');
+            return redirect()->route('genreAdmin')->with('success', 'Genre updated successfully.');
         }
 
-        return redirect()->route('genres')->with('error', 'Genre not found.');
+        return redirect()->route('genreAdmin')->with('error', 'Genre not found.');
     }
 
 }
