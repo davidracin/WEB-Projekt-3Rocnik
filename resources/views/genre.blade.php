@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.layout')
 
 @section('title', 'Genres')
 
@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-12">
             <h1 class="mb-4">Genres</h1>
-            
+
             <div class="mb-3 p-3 bg-primary text-white rounded">
                 <h5 class="mb-0">Seznam žánrů</h5>
             </div>

@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -13,7 +14,7 @@
             </ul>
             <ul class="navbar-nav ms-auto d-flex flex-row">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('login*') ? 'active' : '' }}" href="{{ route('login') }}">Přihlášení</a>
+                    <a class="nav-link {{ request()->is('logout*') ? 'active' : '' }}" href="{{ route('logout') }}">Odhlásit se</a>
                 </li>
             </ul>
 

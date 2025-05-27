@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.layout')
 
 @section('title', 'Register')
 
@@ -24,7 +24,7 @@
                     </span>
                   @enderror
                 </div>
-                
+
                 <div class="form-floating mb-4">
                   <input type="email" id="email" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror" value="{{ old('email') }}" required autocomplete="email" placeholder="Email" />
                   <label for="email">Email</label>

@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.layout')
 
 @section('title', 'Login')
 
@@ -14,7 +14,7 @@
 
               <form method="POST" action="{{ route('login') }}">
                 @csrf
-                
+
                 <div class="form-floating mb-4">
                   <input type="email" id="email" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email" />
                   <label for="email">Email</label>

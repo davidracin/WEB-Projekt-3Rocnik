@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +9,8 @@
 </head>
 <body>
     <!-- Include navbar -->
-    @include('layouts.navbar')
-    
+    @include('layouts.admin.navbar')
+
     <!-- Main content container -->
     <div class="container">
         @yield('content')
