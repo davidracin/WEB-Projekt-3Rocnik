@@ -21,6 +21,13 @@ class Genre extends Controller
         ]);
     }
 
+    public function genreAdmin()
+    {
+        return view('admin.genre', [
+            'genres' => $this->genres, // Pass the genres to the view
+        ]);
+    }
+
     public function deleteGenre(Request $request)
     {
         $genreId = $request->input('genre_id'); // Get the genre ID from the request

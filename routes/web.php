@@ -21,10 +21,10 @@ Route::get('/', function () {
 
 // Define the route for the genre page (both singular and plural forms)
 Route::get('/genre', [Genre::class, 'genre'])->name('genre');
-Route::post('/delete-genre', [Genre::class, 'deleteGenre'])->name('delete-genre');
-Route::post('/add-genre', [Genre::class, 'addGenre'])->name('add-genre');
-Route::post('/edit-genre', [Genre::class, 'editGenre'])->name('edit-genre');
-Route::get('/genres', [Genre::class, 'genre'])->name('genres');
+Route::get('/genre/admin', [Genre::class, 'genreAdmin'])->middleware('auth')->name('genreAdmin');
+Route::post('/genre/delete', [Genre::class, 'deleteGenre'])->middleware('auth')->name('delete-genre');
+Route::post('/genre/add', [Genre::class, 'addGenre'])->middleware('auth')->name('add-genre');
+Route::post('/genre/edit', [Genre::class, 'editGenre'])->middleware('auth')->name('edit-genre');
 
 //Routes for the login and register pages
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');

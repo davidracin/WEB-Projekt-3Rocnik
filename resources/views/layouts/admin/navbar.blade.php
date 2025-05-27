@@ -6,10 +6,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+                    <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ route('dashboard') }}">Knihy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('genre*') ? 'active' : '' }}" href="{{ route('genre') }}">Genres</a>
+                    <a class="nav-link {{ request()->is('genre/admin*') ? 'active' : '' }}" href="{{ route('genreAdmin') }}">Žánry</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto d-flex flex-row">
