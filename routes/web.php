@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Genre; // Import the genre controller
 use App\Http\Controllers\AuthController; // Import the auth controller
-
+use App\Http\Controllers\BooksController; // Import the books controller
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,3 +33,5 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+
+Route::get('/books', [BooksController::class, 'books'])->name('books');
