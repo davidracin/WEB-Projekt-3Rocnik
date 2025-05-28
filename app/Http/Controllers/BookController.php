@@ -49,10 +49,38 @@ class BookController extends Controller
         // Get all genres for the sidebar filter
         $genres = Genres::orderBy('name')->get();
         
+        // Determine if we're on the homepage (no search query or genre filter)
+        $isHomepage = !$genre_id && !$request->has('query');
+        
+        // Set up featured books only if we're on the homepage
+        $featuredBooks = $isHomepage ? collect($books->items())->take(5) : null;
+        
+        // Prepare page heading and message
+        $pageHeading = 'Nejnovější knihy';
+        $pageIcon = 'fa-book-open';
+        $emptyMessage = 'V databázi zatím nejsou žádné knihy.';
+        
+        if ($genre_id && $genre = Genres::find($genre_id)) {
+            $pageHeading = 'Knihy v žánru: ' . $genre->name;
+            $pageIcon = 'fa-tag';
+            $emptyMessage = 'V tomto žánru zatím nejsou žádné knihy.';
+        }
+        
+        // Prepare book data with processed display values
+        $bookData = $this->prepareBookData($books, $featuredBooks);
+        
         return view('books.index', [
             'books' => $books,
+            'processedBooks' => $bookData['books'],
+            'processedFeaturedBooks' => $bookData['featuredBooks'],
+            'pagination' => $bookData['pagination'],
             'genres' => $genres,
-            'currentGenre' => $genre_id ? Genres::find($genre_id) : null
+            'currentGenre' => $genre_id ? Genres::find($genre_id) : null,
+            'isHomepage' => $isHomepage,
+            'featuredBooks' => $featuredBooks,
+            'pageHeading' => $pageHeading,
+            'pageIcon' => $pageIcon,
+            'emptyMessage' => $emptyMessage
         ]);
     }
     
@@ -97,10 +125,25 @@ class BookController extends Controller
         // Get all genres for the sidebar filter
         $genres = Genres::all();
         
+        // Page context
+        $pageHeading = 'Knihy v žánru: ' . $genre->name;
+        $pageIcon = 'fa-tag';
+        $emptyMessage = 'V tomto žánru zatím nejsou žádné knihy.';
+        $isHomepage = false;
+        
+        // Prepare book data with processed display values
+        $bookData = $this->prepareBookData($books);
+        
         return view('books.index', [
             'books' => $books,
+            'processedBooks' => $bookData['books'],
+            'pagination' => $bookData['pagination'],
             'genres' => $genres,
-            'currentGenre' => $genre
+            'currentGenre' => $genre,
+            'isHomepage' => $isHomepage,
+            'pageHeading' => $pageHeading,
+            'pageIcon' => $pageIcon,
+            'emptyMessage' => $emptyMessage
         ]);
     }
       /**
@@ -153,12 +196,95 @@ class BookController extends Controller
         // Get all genres for the sidebar filter
         $genres = Genres::orderBy('name')->get();
         
+        // Set page heading, icon and message for search results
+        $pageHeading = 'Výsledky vyhledávání: "' . $searchQuery . '"';
+        $pageIcon = 'fa-search';
+        $emptyMessage = 'Nebyly nalezeny žádné knihy odpovídající vašemu dotazu.';
+        $isHomepage = false; // Search results are never homepage
+        
+        // Prepare book data with processed display values
+        $bookData = $this->prepareBookData($books);
+        
         return view('books.index', [
             'books' => $books,
+            'processedBooks' => $bookData['books'],
+            'pagination' => $bookData['pagination'],
             'genres' => $genres,
             'searchQuery' => $searchQuery,
             'sortBy' => $sort_by,
-            'sortDir' => $sort_dir
+            'sortDir' => $sort_dir,
+            'isHomepage' => $isHomepage,
+            'pageHeading' => $pageHeading,
+            'pageIcon' => $pageIcon,
+            'emptyMessage' => $emptyMessage
         ]);
+    }
+    
+    /**
+     * Prepare book data for view presentation.
+     * 
+     * This method processes books and featured books to handle conditional logic
+     * that would otherwise be in the view.
+     *
+     * @param  \Illuminate\Pagination\LengthAwarePaginator  $books
+     * @param  \Illuminate\Support\Collection|null  $featuredBooks
+     * @return array
+     */
+    private function prepareBookData($books, $featuredBooks = null): array
+    {
+        // Process main book list for display
+        $processedBooks = [];
+        foreach ($books as $book) {
+            $processedBooks[] = [
+                'id' => $book->id,
+                'title' => $book->title,
+                'cover_image' => $book->cover_image,
+                'published_year' => $book->published_year,
+                'publisher' => $book->publisher ? [
+                    'name' => $book->publisher->name
+                ] : null,
+                'description' => \Illuminate\Support\Str::limit($book->description, 120),
+                'author_names' => $book->authors->count() > 0 
+                    ? $book->authors->pluck('name')->join(', ') 
+                    : 'Neznámý autor',
+                'has_authors' => $book->authors->count() > 0,
+                'genres' => $book->genres->take(2),
+                'additional_genres_count' => $book->genres->count() > 2 
+                    ? $book->genres->count() - 2 
+                    : 0,
+                'pages' => $book->pages,
+                'isbn' => $book->ISBN,
+                'has_isbn' => !empty($book->ISBN)
+            ];
+        }
+
+        // Process featured books if provided
+        $processedFeaturedBooks = [];
+        if ($featuredBooks) {
+            foreach ($featuredBooks as $book) {
+                $processedFeaturedBooks[] = [
+                    'id' => $book->id,
+                    'title' => $book->title,
+                    'cover_image' => $book->cover_image,
+                    'author_names' => $book->authors->count() > 0 
+                        ? $book->authors->pluck('name')->join(', ') 
+                        : 'Neznámý autor',
+                    'has_authors' => $book->authors->count() > 0,
+                    'description' => \Illuminate\Support\Str::limit($book->description, 60)
+                ];
+            }
+        }
+        
+        return [
+            'books' => $processedBooks,
+            'featuredBooks' => $processedFeaturedBooks,
+            'pagination' => [
+                'current_page' => $books->currentPage(),
+                'last_page' => $books->lastPage(),
+                'per_page' => $books->perPage(),
+                'total' => $books->total(),
+                'links' => $books->links('pagination::bootstrap-5')->toHtml()
+            ]
+        ];
     }
 }

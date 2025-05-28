@@ -21,29 +21,29 @@
 </div>
 
 <!-- Featured Books Carousel (Only visible on homepage) -->
-@if(!isset($searchQuery) && !isset($currentGenre))
+@if($isHomepage)
 <div class="mb-5">
     <h2 class="mb-4 fw-bold"><i class="fas fa-star me-2"></i>Doporučené knihy</h2>
     <div class="featured-books-carousel">
         <div class="row flex-nowrap overflow-auto pb-2 g-4" style="scroll-behavior: smooth;">
-            @foreach($books->take(5) as $featuredBook)
+            @foreach($processedFeaturedBooks as $featuredBook)
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <div class="card featured-book-card h-100 shadow-lg">
                     <div class="row g-0 h-100">
                         <div class="col-4">
-                            <img src="{{ $featuredBook->cover_image }}" class="img-fluid h-100" style="object-fit: cover;" alt="{{ $featuredBook->title }}">
+                            <img src="{{ $featuredBook['cover_image'] }}" class="img-fluid h-100" style="object-fit: cover;" alt="{{ $featuredBook['title'] }}">
                         </div>
                         <div class="col-8">
                             <div class="card-body">
                                 <span class="badge bg-warning text-dark mb-2">Doporučujeme</span>
-                                <h5 class="card-title fw-bold">{{ $featuredBook->title }}</h5>
+                                <h5 class="card-title fw-bold">{{ $featuredBook['title'] }}</h5>
                                 <p class="card-text small mb-1">
-                                    @if($featuredBook->authors->count() > 0)
-                                    <i class="fas fa-user-edit me-1"></i> {{ $featuredBook->authors->pluck('name')->join(', ') }}
+                                    @if($featuredBook['has_authors'])
+                                    <i class="fas fa-user-edit me-1"></i> {{ $featuredBook['author_names'] }}
                                     @endif
                                 </p>
-                                <p class="card-text small text-truncate-2">{{ \Illuminate\Support\Str::limit($featuredBook->description, 60) }}</p>
-                                <a href="{{ route('books.show', $featuredBook->id) }}" class="btn btn-sm btn-primary stretched-link">Zobrazit detail</a>
+                                <p class="card-text small text-truncate-2">{{ $featuredBook['description'] }}</p>
+                                <a href="{{ route('books.show', $featuredBook['id']) }}" class="btn btn-sm btn-primary stretched-link">Zobrazit detail</a>
                             </div>
                         </div>
                     </div>
@@ -96,11 +96,11 @@
 
                 <!-- Publishers filter (collapsible) -->
                 <div class="mb-4">
-                    <h6 class="border-bottom pb-2 mb-3 d-flex justify-content-between align-items-center"
-                        data-bs-toggle="collapse" href="#publishersCollapse" role="button" aria-expanded="false">
-                        <span>Vydavatelé</span>
+                    <button class="btn btn-link p-0 text-decoration-none w-100 text-start border-bottom pb-2 mb-3 d-flex justify-content-between align-items-center"
+                        data-bs-toggle="collapse" data-bs-target="#publishersCollapse" aria-expanded="false" aria-controls="publishersCollapse">
+                        <h6 class="mb-0">Vydavatelé</h6>
                         <i class="fas fa-chevron-down small"></i>
-                    </h6>
+                    </button>
                     <div class="collapse" id="publishersCollapse">
                         <div class="form-check mb-2">
                             <input class="form-check-input" type="checkbox" id="publisher1">
@@ -137,13 +137,7 @@
     <div class="col-lg-9">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="fw-bold">
-                @if(isset($currentGenre))
-                <i class="fas fa-tag me-2"></i>Knihy v žánru: {{ $currentGenre->name }}
-                @elseif(isset($searchQuery))
-                <i class="fas fa-search me-2"></i>Výsledky vyhledávání: "{{ $searchQuery }}"
-                @else
-                <i class="fas fa-book-open me-2"></i>Nejnovější knihy
-                @endif
+                <i class="fas {{ $pageIcon }} me-2"></i>{{ $pageHeading }}
             </h2>
             <div class="dropdown">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -161,25 +155,19 @@
         @if($books->isEmpty())
         <div class="alert alert-info">
             <i class="fas fa-info-circle me-2"></i>
-            @if(isset($searchQuery))
-            Nebyly nalezeny žádné knihy odpovídající vašemu dotazu.
-            @elseif(isset($currentGenre))
-            V tomto žánru zatím nejsou žádné knihy.
-            @else
-            V databázi zatím nejsou žádné knihy.
-            @endif
+            {{ $emptyMessage }}
         </div> @else
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            @foreach($books as $book)
+            @foreach($processedBooks as $book)
             <div class="col">
                 <div class="card h-100 book-card shadow-sm border-0 rounded-3 overflow-hidden">
-                    <a href="{{ route('books.show', $book->id) }}" class="text-decoration-none">
+                    <a href="{{ route('books.show', $book['id']) }}" class="text-decoration-none">
                         <div class="position-relative book-cover-container">
-                            <img src="{{ $book->cover_image }}" class="card-img-top book-cover" alt="{{ $book->title }}">
+                            <img src="{{ $book['cover_image'] }}" class="card-img-top book-cover" alt="{{ $book['title'] }}">
                             <div class="position-absolute top-0 start-0 w-100 p-2 d-flex justify-content-between">
-                                <span class="badge bg-primary rounded-pill">{{ $book->published_year }}</span>
-                                @if($book->publisher)
-                                <span class="badge bg-dark rounded-pill" title="Vydavatel">{{ $book->publisher->name }}</span>
+                                <span class="badge bg-primary rounded-pill">{{ $book['published_year'] }}</span>
+                                @if($book['publisher'])
+                                <span class="badge bg-dark rounded-pill" title="Vydavatel">{{ $book['publisher']['name'] }}</span>
                                 @endif
                             </div>
                             <div class="book-overlay">
@@ -189,44 +177,40 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title text-dark fw-bold mb-1 text-truncate-1" title="{{ $book->title }}">{{ $book->title }}</h5>
+                            <h5 class="card-title text-dark fw-bold mb-1 text-truncate-1" title="{{ $book['title'] }}">{{ $book['title'] }}</h5>
 
                             <!-- Authors -->
                             <p class="card-text text-secondary mb-2">
                                 <small>
                                     <i class="fas fa-user-edit me-1"></i>
-                                    @if($book->authors->count() > 0)
-                                    {{ $book->authors->pluck('name')->join(', ') }}
-                                    @else
-                                    Neznámý autor
-                                    @endif
+                                    {{ $book['author_names'] }}
                                 </small>
                             </p>
 
                             <!-- Genre badges -->
                             <div class="mb-3">
-                                @foreach($book->genres->take(2) as $genre)
+                                @foreach($book['genres'] as $genre)
                                 <a href="{{ route('books.by-genre', $genre->id) }}" class="badge bg-primary badge-hover genre-badge text-decoration-none">{{ $genre->name }}</a>
                                 @endforeach
-                                @if($book->genres->count() > 2)
-                                <span class="badge bg-secondary genre-badge">+{{ $book->genres->count() - 2 }}</span>
+                                @if($book['additional_genres_count'] > 0)
+                                <span class="badge bg-secondary genre-badge">+{{ $book['additional_genres_count'] }}</span>
                                 @endif
                             </div>
 
                             <!-- Description -->
                             <p class="card-text text-truncate-2 text-muted">
-                                {{ \Illuminate\Support\Str::limit($book->description, 120) }}
+                                {{ $book['description'] }}
                             </p>
                         </div>
                         <div class="card-footer bg-white border-top-0">
                             <div class="d-flex align-items-center">
                                 <div>
                                     <span class="text-muted small me-3">
-                                        <i class="fas fa-book me-1"></i> {{ $book->pages }} stran
+                                        <i class="fas fa-book me-1"></i> {{ $book['pages'] }} stran
                                     </span>
-                                    @if($book->ISBN)
+                                    @if($book['has_isbn'])
                                     <span class="text-muted small d-none d-lg-inline-block">
-                                        <i class="fas fa-barcode me-1"></i> ISBN: {{ $book->ISBN }}
+                                        <i class="fas fa-barcode me-1"></i> ISBN: {{ $book['isbn'] }}
                                     </span>
                                     @endif
                                 </div>
@@ -239,7 +223,7 @@
         </div>
         <!-- Pagination -->
         <div class="mt-5 d-flex justify-content-center">
-            {{ $books->links('pagination::bootstrap-5') }}
+            {!! $pagination['links'] !!}
         </div>
         @endif
     </div>
