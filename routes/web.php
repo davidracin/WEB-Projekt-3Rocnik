@@ -32,6 +32,6 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 
-Route::get('/books', [BooksController::class, 'books'])->name('books');
+Route::get('/books', [BooksController::class, 'books'])->middleware('auth')->name('dashboard');
+Route::post('/books/add', [BooksController::class, 'addBook'])->middleware('auth')->name('addBook');

@@ -202,7 +202,16 @@ if (!function_exists('add_modal')) {
             if ($fieldType === 'textarea') {
                 $result .= "<textarea name=\"" . $fieldName . "\" id=\"" . $fieldName . "\" class=\"" . $fieldClass . "\" placeholder=\"" . $fieldPlaceholder . "\" " . $fieldRequired . ">" . htmlspecialchars($fieldValue) . "</textarea>\n";
             } elseif ($fieldType === 'select') {
-                $result .= "<select name=\"" . $fieldName . "\" id=\"" . $fieldName . "\" class=\"" . $fieldClass . "\" " . $fieldRequired . ">\n";
+                $result .= "<select name=\"" . $fieldName . "\" id=\"" . $fieldName . "\" class=\"" . $fieldClass . "\" " . $fieldRequired . " >\n";
+                if (isset($field['options'])) {
+                    foreach ($field['options'] as $optionValue => $optionText) {
+                        $selected = ($fieldValue == $optionValue) ? 'selected' : '';
+                        $result .= "<option value=\"" . $optionValue . "\" " . $selected . ">" . $optionText . "</option>\n";
+                    }
+                }
+                $result .= "</select>\n";
+            } elseif ($fieldType === 'select-multiple') {
+                $result .= "<select name=\"" . $fieldName . "\" id=\"" . $fieldName . "\" class=\"" . $fieldClass . "\" " . $fieldRequired . " multiple>\n";
                 if (isset($field['options'])) {
                     foreach ($field['options'] as $optionValue => $optionText) {
                         $selected = ($fieldValue == $optionValue) ? 'selected' : '';
