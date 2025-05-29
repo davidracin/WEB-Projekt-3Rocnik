@@ -183,7 +183,7 @@ if (!function_exists('add_modal')) {
         $result .= "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\"></button>\n";
         $result .= "</div>\n";
         $result .= "<div class=\"modal-body\">\n";
-        $result .= "<form method=\"POST\" action=\"" . $route . "\" id=\"form-" . $idModal . "\">\n";
+        $result .= "<form method=\"POST\" action=\"" . $route . "\" id=\"form-" . $idModal . "\" enctype='multipart/form-data'>\n";
         $result .= "<input type=\"hidden\" name=\"_token\" value=\"" . csrf_token() . "\">";
 
         // Generate form fields

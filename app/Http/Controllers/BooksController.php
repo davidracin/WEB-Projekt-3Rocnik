@@ -30,17 +30,28 @@ class BooksController extends Controller
 
     public function addBook(Request $request)
     {
-        // Validate the request data
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'author_id' => 'required|exists:authors,id',
-            'publisher_id' => 'required|exists:publishers,id',
-            'publishing_city_id' => 'required|exists:publishing_cities,id',
-            'genre_id' => 'required|exists:genres,id',
-            'published_date' => 'required|date',
-        ]);
 
-        // Create a new book instance
-        echo var_dump($request->all());
+        $book = new Books();
+        $book->cover_image = $request->file('cover_image')->store('covers', 'public'); // Store the cover image in the 'covers' directory
+        $book->title = $request->input('title');
+        $book->description = $request->input('description');
+        $book->publishers_id = $request->input('publishers_id');
+        $book->publishing_cities_id = $request->input('publishing_cities_id');
+        $book->published_year = $request->input('published_year');
+        $book->isbn = $request->input('isbn');
+        $book->pages = $request->input('pages');
+        $book->save(); // Save the book to the database
+        $id = $book->id;
+
+
+        $genre_ids = $request->input('genres_id');
+        $author_ids = $request->input('authors_id');
+        foreach ($genre_ids as $genre_id) {
+            $book->genres()->attach($genre_id); // Attach genres to the book
+        }
+        foreach ($author_ids as $author_id) {
+            $book->authors()->attach($author_id); // Attach authors to the book
+        }
+        return redirect()->route('dashboard')->with('success', 'Book added successfully!');
     }
 }

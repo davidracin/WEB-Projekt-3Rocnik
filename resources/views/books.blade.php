@@ -34,14 +34,14 @@
         'placeholder' => 'Zadejte popis knihy',
     ],
     [
-        'name' => 'genres_id',
+        'name' => 'genres_id[]',
         'label' => 'Žánr',
         'type' => 'select-multiple',
         'options' => $genres->pluck('name', 'id')->toArray(),
         'required' => true,
     ],
     [
-        'name' => 'authors_id',
+        'name' => 'authors_id[]',
         'label' => 'Autoři',
         'type' => 'select-multiple',
         'options' => $authors->pluck('name', 'id')->toArray(),
