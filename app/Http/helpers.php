@@ -234,4 +234,67 @@ if (!function_exists('add_modal')) {
         return $result;
     }
 }
+if (!function_exists('edit_modal2')) {
+    function edit_modal2($idModal, $heading, $route, $fields = [], $type = "alert", $buttonText = "Přidat")
+    {
+        $result = "";
+        $result .= "<div class=\"modal fade\" id=\"" . $idModal . "\">\n";
+        $result .= "<div class=\"modal-dialog\">\n";
+        $result .= " <div class=\"modal-content\">\n";
+        $result .= "<div class=\"modal-header\">\n";
+        $result .= "<h4 class=\"modal-title\">" . $heading . "</h4>\n";
+        $result .= "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\"></button>\n";
+        $result .= "</div>\n";
+        $result .= "<div class=\"modal-body\">\n";
+        $result .= "<form method=\"POST\" action=\"" . $route . "\" id=\"form-" . $idModal . "\" enctype='multipart/form-data'>\n";
+        $result .= "<input type=\"hidden\" name=\"_token\" value=\"" . csrf_token() . "\">";
+
+        // Generate form fields
+        foreach ($fields as $field) {
+            $fieldName = $field['name'] ?? '';
+            $fieldLabel = $field['label'] ?? ucfirst($fieldName);
+            $fieldType = $field['type'] ?? 'text';
+            $fieldValue = $field['value'] ?? '';
+            $fieldRequired = isset($field['required']) && $field['required'] ? 'required' : '';
+            $fieldClass = $field['class'] ?? 'form-control';
+            $fieldPlaceholder = $field['placeholder'] ?? '';
+
+            $result .= "<div class=\"mb-3\">\n";
+            $result .= "<label for=\"" . $fieldName . "\" class=\"form-label\">" . $fieldLabel . "</label>\n";
+
+            if ($fieldType === 'textarea') {
+                $result .= "<textarea name=\"" . $fieldName . "\" id=\"" . $fieldName . "\" class=\"" . $fieldClass . "\" placeholder=\"" . $fieldPlaceholder . "\" " . $fieldRequired . ">" . htmlspecialchars($fieldValue) . "</textarea>\n";
+            } elseif ($fieldType === 'select') {
+                $result .= "<select name=\"" . $fieldName . "\" id=\"" . $fieldName . "\" class=\"" . $fieldClass . "\" " . $fieldRequired . " >\n";
+                if (isset($field['options'])) {
+                    foreach ($field['options'] as $optionValue => $optionText) {
+                        $selected = ($fieldValue == $optionValue) ? 'selected' : '';
+                        $result .= "<option value=\"" . $optionValue . "\" " . $selected . ">" . $optionText . "</option>\n";
+                    }
+                }
+                $result .= "</select>\n";
+            } elseif ($fieldType === 'select-multiple') {
+                $result .= "<select name=\"" . $fieldName . "\" id=\"" . $fieldName . "\" class=\"" . $fieldClass . "\" " . $fieldRequired . " multiple>\n";
+                if (isset($field['options'])) {
+                    foreach ($field['options'] as $optionValue => $optionText) {
+                        $selected = ($fieldValue == $optionValue) ? 'selected' : '';
+                        $result .= "<option value=\"" . $optionValue . "\" " . $selected . ">" . $optionText . "</option>\n";
+                    }
+                }
+                $result .= "</select>\n";
+            } else {
+                $result .= "<input type=\"" . $fieldType . "\" name=\"" . $fieldName . "\" id=\"" . $fieldName . "\" class=\"" . $fieldClass . "\" value=\"" . htmlspecialchars($fieldValue) . "\" placeholder=\"" . $fieldPlaceholder . "\" " . $fieldRequired . ">\n";
+            }
+            $result .= "</div>\n";
+        }
+
+        $result .= "</div>\n";
+        $result .= "<div class=\"modal-footer\">\n";
+        $result .= "<button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Zrušit</button>\n";
+        $result .= "<button type=\"submit\" class=\"btn btn-" . $type . "\" form=\"form-" . $idModal . "\">" . $buttonText . "</button>\n";
+        $result .= "</form>\n";
+        $result .= "</div>\n</div>\n</div>\n</div>\n";
+        return $result;
+    }
+}
 ?>

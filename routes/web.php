@@ -35,3 +35,5 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/books', [BooksController::class, 'books'])->middleware('auth')->name('dashboard');
 Route::post('/books/add', [BooksController::class, 'addBook'])->middleware('auth')->name('addBook');
+Route::delete('/books/delete/{id}', [BooksController::class, 'deleteBook'])->middleware('auth')->name('deleteBook');
+Route::post('/books/edit/{id}', [BooksController::class, 'editBook'])->middleware('auth')->name('editBook');
