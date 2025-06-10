@@ -22,6 +22,27 @@ body {
     margin-top: 0;
     border-top: 0;
     border-radius: 0;
+    z-index: 1030; /* Ensure navbar is above other content */
+}
+
+/* Dropdown menu fixes */
+.dropdown-menu {
+    z-index: 1050 !important; /* Higher than TinyMCE dialogs */
+    border: 1px solid rgba(0,0,0,.15);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.175);
+}
+
+/* Ensure dropdown toggle works properly */
+.dropdown-toggle::after {
+    margin-left: 0.5em;
+}
+
+/* Fix dropdown positioning issues */
+.navbar .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
 }
 
 /* Content padding */

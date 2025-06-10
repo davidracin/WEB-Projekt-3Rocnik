@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Genre; // Import the genre controller
 use App\Http\Controllers\AuthController; // Import the auth controller
 use App\Http\Controllers\BookController; // Import the book controller
+use App\Http\Controllers\ReviewController; // Import the review controller
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +39,10 @@ Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::get('/books/search', [BookController::class, 'search'])->name('books.search');
 Route::get('/books/genre/{id}', [BookController::class, 'byGenre'])->name('books.by-genre');
+Route::get('/books/author/{id}', [BookController::class, 'byAuthor'])->name('books.by-author');
 Route::get('/books/{id}', [BookController::class, 'show'])->name('books.show');
+
+// Review routes
+Route::post('/books/{book}/reviews', [ReviewController::class, 'store'])->middleware('auth')->name('reviews.store');
+Route::put('/reviews/{review}', [ReviewController::class, 'update'])->middleware('auth')->name('reviews.update');
+Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->middleware('auth')->name('reviews.destroy');

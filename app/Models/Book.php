@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Book extends Model
 {
@@ -79,5 +80,35 @@ class Book extends Model
     public function publishingCity(): BelongsTo
     {
         return $this->belongsTo(PublishingCity::class, 'publishing_cities_id');
+    }
+
+    /**
+     * Get the reviews for the book.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'books_id');
+    }
+
+    /**
+     * Get the average rating for the book.
+     *
+     * @return float
+     */
+    public function getAverageRatingAttribute(): float
+    {
+        return $this->reviews()->avg('rating') ?: 0;
+    }
+
+    /**
+     * Get the total number of reviews for the book.
+     *
+     * @return int
+     */
+    public function getReviewsCountAttribute(): int
+    {
+        return $this->reviews()->count();
     }
 }

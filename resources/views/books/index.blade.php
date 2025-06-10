@@ -66,15 +66,6 @@
                 </h5>
             </div>
             <div class="card-body">
-                <!-- Year slider - could be implemented with JS -->
-                <div class="mb-4">
-                    <h6 class="border-bottom pb-2 mb-3">Rok vydání</h6>
-                    <div class="d-flex justify-content-between mb-2">
-                        <span class="text-muted small">Od: 1900</span>
-                        <span class="text-muted small">Do: {{ date('Y') }}</span>
-                    </div>
-                    <input type="range" class="form-range" min="1900" max="{{ date('Y') }}" value="1900" id="yearRange">
-                </div>
 
                 <!-- Genres filter -->
                 <div class="mb-4">
@@ -94,34 +85,6 @@
                     </div>
                 </div>
 
-                <!-- Publishers filter (collapsible) -->
-                <div class="mb-4">
-                    <button class="btn btn-link p-0 text-decoration-none w-100 text-start border-bottom pb-2 mb-3 d-flex justify-content-between align-items-center"
-                        data-bs-toggle="collapse" data-bs-target="#publishersCollapse" aria-expanded="false" aria-controls="publishersCollapse">
-                        <h6 class="mb-0">Vydavatelé</h6>
-                        <i class="fas fa-chevron-down small"></i>
-                    </button>
-                    <div class="collapse" id="publishersCollapse">
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" id="publisher1">
-                            <label class="form-check-label" for="publisher1">
-                                Albatros
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" id="publisher2">
-                            <label class="form-check-label" for="publisher2">
-                                Grada
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="publisher3">
-                            <label class="form-check-label" for="publisher3">
-                                Mladá fronta
-                            </label>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Reset filters button -->
                 <div class="d-grid gap-2">

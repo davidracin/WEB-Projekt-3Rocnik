@@ -6,6 +6,8 @@
     <title>@yield('title', 'Knihovna Online')</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap CSS -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom CSS -->
     @vite(['resources/css/app.css'])
     @yield('styles')
@@ -36,7 +38,7 @@
                 <ul class="navbar-nav">
                     @auth
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -77,6 +79,47 @@
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     @vite(['resources/js/app.js'])
+    
+    <!-- Global Bootstrap initialization -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Bootstrap initialization started');
+        
+        // Initialize all Bootstrap components
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+        
+        // Ensure dropdowns work - especially important for dynamic content
+        var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+        console.log('Found dropdown elements:', dropdownElementList.length);
+        
+        dropdownElementList.forEach(function (dropdownToggleEl) {
+            if (!dropdownToggleEl.hasAttribute('data-bs-dropdown-initialized')) {
+                try {
+                    new bootstrap.Dropdown(dropdownToggleEl);
+                    dropdownToggleEl.setAttribute('data-bs-dropdown-initialized', 'true');
+                    console.log('Dropdown initialized for:', dropdownToggleEl.id);
+                } catch (error) {
+                    console.error('Failed to initialize dropdown:', error);
+                }
+            }
+        });
+        
+        console.log('Bootstrap initialization completed');
+    });
+    
+    // Additional fallback for dropdown functionality
+    document.addEventListener('click', function(e) {
+        const dropdownToggle = e.target.closest('[data-bs-toggle="dropdown"]');
+        if (dropdownToggle) {
+            console.log('Dropdown clicked:', dropdownToggle.id);
+            // Let Bootstrap handle it first, but add logging
+        }
+    });
+    </script>
+    
     @yield('scripts')
 </body>
 </html>

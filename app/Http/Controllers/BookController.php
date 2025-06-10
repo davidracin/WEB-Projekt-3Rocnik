@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Author;
 use App\Models\Genres;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -95,12 +96,29 @@ class BookController extends Controller
      */
     public function show($id): View
     {
-        // Get the book with its relationships
-        $book = Book::with(['authors', 'genres', 'publisher', 'publishingCity.country'])
+        // Get the book with its relationships including reviews
+        $book = Book::with(['authors', 'genres', 'publisher', 'publishingCity.country', 'reviews.user'])
             ->findOrFail($id);
         
+        // Get reviews ordered by newest first
+        $reviews = $book->reviews()->with('user')->newest()->paginate(10);
+        
+        // Calculate average rating
+        $averageRating = $book->reviews()->avg('rating') ?: 0;
+        $totalReviews = $book->reviews()->count();
+        
+        // Check if current user has already reviewed this book
+        $userReview = null;
+        if (auth()->check()) {
+            $userReview = $book->reviews()->where('users_id', auth()->id())->first();
+        }
+        
         return view('books.show', [
-            'book' => $book
+            'book' => $book,
+            'reviews' => $reviews,
+            'averageRating' => round($averageRating, 1),
+            'totalReviews' => $totalReviews,
+            'userReview' => $userReview
         ]);
     }
     
@@ -140,6 +158,50 @@ class BookController extends Controller
             'pagination' => $bookData['pagination'],
             'genres' => $genres,
             'currentGenre' => $genre,
+            'isHomepage' => $isHomepage,
+            'pageHeading' => $pageHeading,
+            'pageIcon' => $pageIcon,
+            'emptyMessage' => $emptyMessage
+        ]);
+    }
+
+    /**
+     * Display books filtered by author.
+     * 
+     * This method retrieves all books by a specific author,
+     * orders them by published year, and paginates the results.
+     *
+     * @param  int  $authorId
+     * @return \Illuminate\View\View
+     */
+    public function byAuthor($authorId): View
+    {
+        // Get the specified author
+        $author = Author::findOrFail($authorId);
+        
+        // Get all books by this author with eager loading
+        $books = $author->books()->with(['authors', 'genres', 'publisher'])
+            ->orderBy('published_year', 'desc')
+            ->paginate(12);
+        
+        // Get all genres for the sidebar filter
+        $genres = Genres::all();
+        
+        // Page context
+        $pageHeading = 'Knihy od autora: ' . $author->name;
+        $pageIcon = 'fa-user-edit';
+        $emptyMessage = 'Tento autor zatím nemá v databázi žádné knihy.';
+        $isHomepage = false;
+        
+        // Prepare book data with processed display values
+        $bookData = $this->prepareBookData($books);
+        
+        return view('books.index', [
+            'books' => $books,
+            'processedBooks' => $bookData['books'],
+            'pagination' => $bookData['pagination'],
+            'genres' => $genres,
+            'currentAuthor' => $author,
             'isHomepage' => $isHomepage,
             'pageHeading' => $pageHeading,
             'pageIcon' => $pageIcon,
