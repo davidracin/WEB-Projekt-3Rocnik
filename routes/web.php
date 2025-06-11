@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Genre; // Import the genre controller
 use App\Http\Controllers\AuthController; // Import the auth controller
 use App\Http\Controllers\PublicBookController; // Import the public book controller
+use App\Http\Controllers\BooksController; // Import the books controller (admin)
 use App\Http\Controllers\ReviewController; // Import the review controller
 
 /*
@@ -25,7 +26,7 @@ Route::get('/genre', [Genre::class, 'genre'])->name('genre');
 Route::get('/genre/admin', [Genre::class, 'genreAdmin'])->middleware('auth')->name('genreAdmin');
 Route::delete('/genre/delete', [Genre::class, 'deleteGenre'])->middleware('auth')->name('genreDelete');
 Route::post('/genre/add', [Genre::class, 'addGenre'])->middleware('auth')->name('genreAdd');
-Route::post('/genre/edit', [Genre::class, 'editGenre'])->middleware('auth')->name('genreEdit');
+Route::put('/genre/edit', [Genre::class, 'editGenre'])->middleware('auth')->name('genreEdit');
 
 //Routes for the login and register pages
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -35,12 +36,18 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 
-// Book routes
+// Public Book Routes (for visitors and users)
 Route::get('/books', [PublicBookController::class, 'index'])->name('books.index');
 Route::get('/books/search', [PublicBookController::class, 'search'])->name('books.search');
 Route::get('/books/genre/{id}', [PublicBookController::class, 'byGenre'])->name('books.by-genre');
 Route::get('/books/author/{id}', [PublicBookController::class, 'byAuthor'])->name('books.by-author');
 Route::get('/books/{id}', [PublicBookController::class, 'show'])->name('books.show');
+
+// Admin Book Management Routes 
+Route::get('/admin/books', [BooksController::class, 'books'])->middleware('auth')->name('admin.books');
+Route::post('/admin/books/add', [BooksController::class, 'addBook'])->middleware('auth')->name('addBook');
+Route::delete('/admin/books/delete/{id}', [BooksController::class, 'deleteBook'])->middleware('auth')->name('deleteBook');
+Route::post('/admin/books/edit/{id}', [BooksController::class, 'editBook'])->middleware('auth')->name('editBook');
 
 // Review routes
 Route::post('/books/{book}/reviews', [ReviewController::class, 'store'])->middleware('auth')->name('reviews.store');
