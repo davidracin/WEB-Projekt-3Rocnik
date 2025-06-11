@@ -26,6 +26,9 @@
                     <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                     </a>
+                    <a href="{{ route('admin.books') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.books') ? 'active' : '' }}">
+                        <i class="fas fa-tags me-2"></i>Správa knih
+                    </a>
                     <a href="{{ route('genreAdmin') }}" class="list-group-item list-group-item-action {{ request()->routeIs('genreAdmin') ? 'active' : '' }}">
                         <i class="fas fa-tags me-2"></i>Správa žánrů
                     </a>

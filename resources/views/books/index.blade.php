@@ -31,7 +31,7 @@
                 <div class="card featured-book-card h-100 shadow-lg">
                     <div class="row g-0 h-100">
                         <div class="col-4">
-                            <img src="{{ $featuredBook['cover_image'] }}" class="img-fluid h-100" style="object-fit: cover;" alt="{{ $featuredBook['title'] }}">
+                            <img src="{{ asset('storage/' . $featuredBook['cover_image']) }}" class="img-fluid h-100" style="object-fit: cover;" alt="{{ $featuredBook['title'] }}">
                         </div>
                         <div class="col-8">
                             <div class="card-body">
@@ -55,8 +55,8 @@
 </div>
 @endif
 
-<div class="row"> 
-    
+<div class="row">
+
 <!-- Sidebar with filters -->
     <div class="col-lg-3 mb-4">
         <div class="card shadow-sm filter-sidebar rounded-3 border-0">
