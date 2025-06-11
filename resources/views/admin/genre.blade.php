@@ -4,6 +4,7 @@
 
 @section('content')
     <div class="row">
+        @include('layouts.alert')
         <div class="col-sm-auto">
             <h1 class="mt-4 mb-4">Žánry</h1>
         </div>
@@ -33,8 +34,8 @@
                         @foreach ($genres as $genre)
                             <tr>
                                 <td>{{ $genre->name }}</td>
-                                <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{ $genre->id }}">Upravit</button></td>
-                                <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#del{{ $genre->id }}">Odstranit</button></td>
+                                <td><button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{ $genre->id }}">Upravit</button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#del{{ $genre->id }}">Odstranit</button></td>
                                 <?php echo delete_modal('del'.$genre->id, $genre->id, 'Odstranit žánr', 'Opravdu chcete odstranit tento žánr?', 'delete') ?>
                                 <?php echo edit_modal('edit'.$genre->id, 'Upravit žánr', 'edit', $genre->getAttributes()); ?>
                             </tr>

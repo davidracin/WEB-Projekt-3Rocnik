@@ -4,6 +4,7 @@
 
 @section('content')
     <div class="row">
+        @include('layouts.alert')
         <div class="col-12">
             <h1 class="mt-5 mb-4">Genres</h1>
 

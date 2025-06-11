@@ -59,14 +59,14 @@ class BooksController extends Controller
         foreach ($author_ids as $author_id) {
             $book->authors()->attach($author_id); // Attach authors to the book
         }
-        return redirect()->route('admin.books')->with('success', 'Book added successfully!');
+        return redirect()->route('admin.books')->with('success', 'Kniha přidána úspěšně!'); // Redirect to the admin books page with a success message
     }
 
     public function deleteBook($id)
     {
         $book = Books::findOrFail($id); // Find the book by ID
         $book->delete(); // Delete the book from the database
-        return redirect()->route('admin.books')->with('success', 'Book deleted successfully!');
+        return redirect()->route('admin.books')->with('success', 'Kniha smazána úspěšně!'); // Redirect to the admin books page with a success message
     }
 
     public function editBook($id, Request $request)
@@ -101,6 +101,6 @@ class BooksController extends Controller
             $book->authors()->attach($author_id); // Attach authors to the book
         }
 
-        return redirect()->route('admin.books')->with('success', 'Book updated successfully!');
+        return redirect()->route('admin.books')->with('success', 'Kniha aktualizována úspěšně!'); // Redirect to the admin books page with a success message
     }
 }

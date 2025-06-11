@@ -36,7 +36,7 @@ class Genre extends Controller
         $genre = Genres::find($genreId);
         if ($genre) {
             $genre->delete();
-            return redirect()->route('genreAdmin')->with('success', 'Genre deleted successfully.');
+            return redirect()->route('genreAdmin')->with('success', 'Žánr smazán úspěšně.');
         }
 
         return redirect()->route('genreAdmin')->with('error', 'Genre not found.');
@@ -51,7 +51,7 @@ class Genre extends Controller
         $genre->name = $genreName;
         $genre->save();
 
-        return redirect()->route('genreAdmin')->with('success', 'Genre added successfully.');
+        return redirect()->route('genreAdmin')->with('success', 'Žánr přidán úspěšně.');
     }
 
     public function editGenre(Request $request)
@@ -64,7 +64,7 @@ class Genre extends Controller
         if ($genre) {
             $genre->name = $genreName;
             $genre->save();
-            return redirect()->route('genreAdmin')->with('success', 'Genre updated successfully.');
+            return redirect()->route('genreAdmin')->with('success', 'Žánr aktualizován úspěšně.');
         }
 
         return redirect()->route('genreAdmin')->with('error', 'Genre not found.');
