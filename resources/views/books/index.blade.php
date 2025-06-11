@@ -230,6 +230,7 @@
 @section('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+            const baseUrl = '{{ url('/') }}';
     const genreSelect = document.getElementById('genreSelect');
     const authorSelect = document.getElementById('authorSelect');
     const filterButton = document.getElementById('filterButton');
@@ -242,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
             authorSelect.disabled = true;
             
             // Fetch authors for this genre
-            fetch(`/api/genres/${genreId}/authors`)
+            fetch(baseUrl +`/api/genres/${genreId}/authors`)
                 .then(response => response.json())
                 .then(authors => {
                     authorSelect.innerHTML = '<option value="">Vyberte autora</option>';
@@ -282,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (genreId && authorId) {
             filterButton.disabled = false;
             filterButton.onclick = function() {
-                window.location.href = `/books/genre/${genreId}/author/${authorId}`;
+                window.location.href = baseUrl + `/books/genre/${genreId}/author/${authorId}`;
             };
         } else {
             filterButton.disabled = true;
