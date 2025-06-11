@@ -230,10 +230,10 @@
         <img src="images/ai_screen_2.png" alt="ai_screen_2" class="doc-img" />
         <img src="images/ai_screen_3.png" alt="ai_screen_3" class="doc-img" />
         <img src="images/ai_screen_4.png" alt="ai_screen_4" class="doc-img" />
-        <img src="images/ai_screen_1_1.png" alt="ai_screen_1_1" class="doc-img" />
-        <img src="images/ai_screen_1_2.png" alt="ai_screen_1_2" class="doc-img" />
-        <img src="images/ai_screen_1_3.png" alt="ai_screen_1_3" class="doc-img" />
-        <img src="images/ai_screen_1_4.png" alt="ai_screen_1_4" class="doc-img" />
+        <img src="images/ai_screen_5.png" alt="ai_screen_5" class="doc-img" />
+        <img src="images/ai_screen_6.png" alt="ai_screen_6" class="doc-img" />
+        <img src="images/ai_screen_7.png" alt="ai_screen_7" class="doc-img" />
+        <img src="images/ai_screen_8.png" alt="ai_screen_8" class="doc-img" />
     </div>
     <footer class="bg-light text-center py-3 mt-5 border-top">
         <small>&copy; {{ date('Y') }} WEB-Projekt-3Rocnik</small>
