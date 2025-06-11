@@ -301,3 +301,7 @@ Tato dokumentace shrnuje rozdělení práce, použité knihovny, popis metod, vl
 ![ai_screen_3](https://github.com/user-attachments/assets/53e36bd2-94c9-49d3-b7c3-43b6899c0129)
 ![ai_screen_4](https://github.com/user-attachments/assets/7297081f-6ff6-46fd-b837-c2c07cd67632)
 
+![ai_screen_1_1](https://github.com/user-attachments/assets/2d896159-7229-4a63-b189-2e0054764ce8)
+![ai_screen_1_4](https://github.com/user-attachments/assets/da0f9aa4-e637-45a8-9b93-493f025ded04)
+![ai_screen_1_3](https://github.com/user-attachments/assets/bcfa81cd-6890-4193-9fdd-423ac94457cb)
+![ai_screen_1_2](https://github.com/user-attachments/assets/6ce5eeb5-3e8c-472a-a8b2-f6ee4b3c43f6)
