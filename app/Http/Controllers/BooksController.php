@@ -37,7 +37,10 @@ class BooksController extends Controller
         $book = new Books();
         if ($request->hasFile('cover_image') && $request->file('cover_image')->isValid()) {
         $book->cover_image = $request->file('cover_image')->store('covers', 'public'); // Store the cover image in the 'covers' directory
+        }else {
+            $book->cover_image = 'none.jpg'; // Set a default cover image if none is provided
         }
+
         $book->title = $request->input('title');
         $book->description = $request->input('description');
         $book->publishers_id = $request->input('publishers_id');
@@ -69,8 +72,11 @@ class BooksController extends Controller
     public function editBook($id, Request $request)
     {
         $book = Books::findOrFail($id); // Find the book by ID
+
         if ($request->hasFile('cover_image') && $request->file('cover_image')->isValid()) {
             $book->cover_image = $request->file('cover_image')->store('covers', 'public'); // Store the cover image in the 'covers' directory
+        }else {
+            $book->cover_image = 'none.jpg'; // Set a default cover image if none is provided
         }
         $book->title = $request->input('title');
         $book->description = $request->input('description');
