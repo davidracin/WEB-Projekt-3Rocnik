@@ -8,7 +8,7 @@ use App\Models\Genres;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class BookController extends Controller
+class PublicBookController extends Controller
 {    /**
      * Display the main page with a list of books.
      * 
