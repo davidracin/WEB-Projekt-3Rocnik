@@ -191,7 +191,7 @@ Zobrazí knihy pouze od vybraného autora, řazené podle roku vydání, stránk
 
 Vyhledává knihy podle názvu, popisu, autora, žánru nebo ISBN, výsledky řadí a stránkuje.
 
--  **prepareBookData($books, $featuredBooks = null): array**
+-  **prepareBookData($books, $featuredBooks = null)**
 
 Pomocná metoda pro zpracování dat knih pro výpis ve view (hlavní i doporučené knihy, stránkování).
 
