@@ -1,66 +1,261 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#  Dokumentace k projektu WEB-Projekt-3Rocnik
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+  
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+  
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+##  Rozdělení práce (what in the fuck)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+  
 
-## Laravel Sponsors
+-  **Matěj Straka**: Backend (databáze, modely, migrace, API, kontrolery)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+-  **David Racin**: Frontend (Blade šablony, Bootstrap, JavaScript, Vite)
 
-### Premium Partners
+-  **Radim Vaculík**: Administrace, testování, dokumentace
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+  
 
-## Contributing
+Každý člen týmu měl jasně vymezenou oblast odpovědnosti. Spolupráce probíhala přes Git a pravidelné konzultace.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+  
 
-## Code of Conduct
+---
+  
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+##  Využité externí nástroje a knihovny
 
-## Security Vulnerabilities
+  
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Název knihovny | Verze | Autor | Licence | Odkaz |
+|--|--|--|--|--|
+| Laravel Framework | 10.10 | Taylor Otwell | MIT | https://laravel.com/ |
+| Bootstrap | 5.3.5 | Twitter, Inc. | MIT | https://getbootstrap.com/ |
+| Vite | 6.3.3 | Evan You | MIT | https://vitejs.dev/ |
+| Laravel Vite Plugin | 1.2.0 | Laravel | MIT | https://github.com/laravel/vite-plugin |
+| Axios | 1.8.4 | Matt Zabriskie | MIT | https://github.com/axios/axios |
+| @popperjs/core | 2.11.8 | Federico Zivolo | MIT | https://popper.js.org/ |
+| FakerPHP/Faker | 1.9.1 | FakerPHP | MIT | https://fakerphp.github.io/ |
+| PHPUnit | 10.1 | Sebastian Bergmann | BSD-3 | https://phpunit.de/ |
+| Spatie Laravel Ignition| 2.0 | Spatie | MIT | https://spatie.be/open-source |
+| Laravel Pint | 1.0 | Laravel | MIT | https://laravel.com/docs/10.x/pint |
+| Mockery | 1.4.4 | Pádraic Brady | BSD-3 | https://github.com/mockery/mockery |
+| Nunomaduro/Collision | 7.0 | Nuno Maduro | MIT | https://github.com/nunomaduro/collision |
+| Laravel Sanctum | 3.3 | Laravel | MIT | https://laravel.com/docs/10.x/sanctum |
+| Laravel Tinker | 2.8 | Laravel | MIT | https://laravel.com/docs/10.x/tinker |
 
-## License
+  
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+  
+
+##  Citace použití AI (???)
+
+  
+
+-  **GitHub Copilot** byl použit při generování části kódu a návrhu řešení.
+
+-  **Screenshot chatu** je přiložen v příloze.
+
+  
+
+---
+
+  
+
+##  Citace použitých fór a zdrojů
+
+  
+
+-  [Stack Overflow](https://stackoverflow.com/)
+
+-  [Laravel Documentation](https://laravel.com/docs/10.x/)
+
+-  [Bootstrap Documentation](https://getbootstrap.com/docs/5.3/)
+
+-  [TinyMCE 7](https://www.tiny.cloud/docs/tinymce/latest/)
+
+  
+
+---
+
+  
+
+##  Popis metod v kontrolerech
+
+  
+###  AuthController
+
+-  **showRegisterForm()**
+
+Zobrazí registrační formulář pro nového uživatele.
+
+-  **register(Request $request)**
+
+Zpracuje registraci uživatele: validuje vstupní data, vytvoří nového uživatele, zahashuje heslo, automaticky přihlásí uživatele a přesměruje na dashboard.
+
+-  **showLoginForm()**
+
+Zobrazí přihlašovací formulář.
+
+-  **login(Request $request)**
+
+Zpracuje přihlášení uživatele: validuje vstupní data, pokusí se uživatele přihlásit, v případě úspěchu regeneruje session a přesměruje na dashboard, v případě neúspěchu vrací chybu.
+
+-  **logout(Request $request)**
+
+Odhlásí uživatele, invaliduje session a přesměruje na přihlašovací stránku.
+
+-  **dashboard()**
+
+Zobrazí dashboard přihlášeného uživatele a předá mu jeho data.
+
+---
+
+###  BooksController
+
+-  **__construct()**
+
+Při vytvoření instance kontroleru načte všechny knihy z databáze (s eager loadingem žánrů a autorů) a stránkuje je po 50 položkách.
+
+-  **books()**
+
+Vrací view se seznamem knih, žánrů, autorů, nakladatelství a měst vydání pro zobrazení uživateli.
+
+-  **addBook(Request $request)**
+
+Přidá novou knihu na základě dat z požadavku. Uloží obrázek obálky, nastaví základní informace o knize, uloží ji do databáze a přiřadí jí vybrané žánry a autory.
+
+-  **deleteBook($id)**
+
+Smaže knihu podle ID z databáze.
+
+-  **editBook($id, Request $request)**
+
+Upraví existující knihu podle ID a nových dat z požadavku. Aktualizuje informace o knize, případně obrázek obálky, a znovu přiřadí žánry a autory.
+
+---
+
+###  GenreController
+
+-  **__construct()**
+
+Při vytvoření instance kontroleru načte všechny žánry z databáze a uloží je do proměnné pro další použití v metodách.
+
+-  **genre()**
+
+Vrací view s přehledem všech žánrů pro uživatelské rozhraní.
+
+-  **genreAdmin()**
+
+Vrací view s přehledem všech žánrů pro administrátorské rozhraní.
+
+-  **deleteGenre(Request $request)**
+
+Smaže žánr podle ID z požadavku. Pokud žánr existuje, odstraní ho a přesměruje zpět s úspěšnou hláškou, jinak vrátí chybu.
+
+-  **addGenre(Request $request)**
+
+Přidá nový žánr na základě názvu z požadavku a uloží ho do databáze. Přesměruje zpět s úspěšnou hláškou.
+
+-  **editGenre(Request $request)**
+
+Upraví existující žánr podle ID a nového názvu z požadavku. Pokud žánr existuje, aktualizuje ho a přesměruje zpět s úspěšnou hláškou, jinak vrátí chybu.
+
+##  Popis vlastních knihoven a jejich metod
+
+  
+
+###  helpers.php
+
+  
+
+-  **delete_modal(...)**
+
+Generuje HTML pro modální okno pro potvrzení mazání záznamu.
+
+-  **edit_modal(...)**
+
+Generuje HTML pro modální okno pro editaci záznamu.
+
+  
+
+---
+
+  
+
+##  Popis konfiguračních proměnných
+| Proměnná | Význam | Možné hodnoty / příklad |
+|-------------------------|------------------------------------------------------------------------|----------------------------------------|
+| APP_NAME | Název aplikace | Laravel, WEB-Projekt-3Rocnik |
+| APP_ENV | Prostředí aplikace | local, production, staging |
+| APP_KEY | Klíč pro šifrování dat v aplikaci | (generovaný řetězec) |
+| APP_DEBUG | Zapnutí/vypnutí debug režimu | true/false |
+| APP_URL | Základní URL aplikace | http://localhost |
+| LOG_CHANNEL | Kanál pro logování | stack, single, daily, syslog, errorlog |
+| LOG_DEPRECATIONS_CHANNEL| Kanál pro logování deprecated hlášek | null, stack, single, daily |
+| LOG_LEVEL | Úroveň logování | debug, info, notice, warning, error |
+| DB_CONNECTION | Typ databáze | mysql, pgsql, sqlite, sqlsrv |
+| DB_HOST | Hostitel databáze | 127.0.0.1, localhost |
+| DB_PORT | Port databáze | 3306 |
+| DB_DATABASE | Název databáze | laravel, webprojekt3 |
+| DB_USERNAME | Uživatelské jméno do databáze | root, uživatelské jméno |
+| DB_PASSWORD | Heslo do databáze | (prázdné nebo dle nastavení) |
+| BROADCAST_DRIVER | Způsob broadcastingu událostí | log, null, pusher, redis |
+| CACHE_DRIVER | Způsob cachování dat | file, redis, memcached |
+| FILESYSTEM_DISK | Výchozí disk pro ukládání souborů | local, public, s3 |
+| QUEUE_CONNECTION | Způsob zpracování fronty | sync, database, redis, beanstalkd |
+| SESSION_DRIVER | Způsob ukládání session | file, cookie, database, redis |
+| SESSION_LIFETIME | Doba platnosti session (v minutách) | 120 |
+| MEMCACHED_HOST | Hostitel pro Memcached cache | 127.0.0.1 |
+| REDIS_HOST | Hostitel pro Redis cache | 127.0.0.1 |
+| REDIS_PASSWORD | Heslo pro Redis | null, heslo |
+| REDIS_PORT | Port pro Redis | 6379 |
+| MAIL_MAILER | Způsob odesílání emailů | smtp, sendmail, mailgun, ses |
+| MAIL_HOST | SMTP server | mailpit, smtp.gmail.com |
+| MAIL_PORT | Port SMTP serveru | 1025, 587, 465 |
+| MAIL_USERNAME | Uživatelské jméno pro SMTP | null, email |
+| MAIL_PASSWORD | Heslo pro SMTP | null, heslo |
+| MAIL_ENCRYPTION | Šifrování SMTP | null, tls, ssl |
+| MAIL_FROM_ADDRESS | Výchozí email odesílatele | hello@example.com |
+| MAIL_FROM_NAME | Výchozí jméno odesílatele | "Laravel", "WEB-Projekt-3Rocnik" |
+| AWS_ACCESS_KEY_ID | Přístupový klíč pro AWS S3 | (řetězec) |
+| AWS_SECRET_ACCESS_KEY | Tajný klíč pro AWS S3 | (řetězec) |
+| AWS_DEFAULT_REGION | Výchozí region pro AWS S3 | us-east-1, eu-central-1 |
+| AWS_BUCKET | Název bucketu pro AWS S3 | (řetězec) |
+| AWS_USE_PATH_STYLE_ENDPOINT | Způsob adresování bucketu | true/false |
+| PUSHER_APP_ID | ID aplikace pro Pusher | (řetězec) |
+| PUSHER_APP_KEY | Klíč aplikace pro Pusher | (řetězec) |
+| PUSHER_APP_SECRET | Tajný klíč pro Pusher | (řetězec) |
+| PUSHER_HOST | Hostitel pro Pusher | (řetězec) |
+| PUSHER_PORT | Port pro Pusher | 443 |
+| PUSHER_SCHEME | Protokol pro Pusher | https, http |
+| PUSHER_APP_CLUSTER | Cluster pro Pusher | mt1, eu, ap1 |
+| VITE_APP_NAME | Název aplikace pro Vite frontend | ${APP_NAME} |
+| VITE_PUSHER_APP_KEY | Klíč aplikace pro Pusher ve Vite | ${PUSHER_APP_KEY} |
+| VITE_PUSHER_HOST | Hostitel pro Pusher ve Vite | ${PUSHER_HOST} |
+| VITE_PUSHER_PORT | Port pro Pusher ve Vite | ${PUSHER_PORT} |
+| VITE_PUSHER_SCHEME | Protokol pro Pusher ve Vite | ${PUSHER_SCHEME} |
+| VITE_PUSHER_APP_CLUSTER | Cluster pro Pusher ve Vite | ${PUSHER_APP_CLUSTER} |
+
+
+  
+
+##  Závěr
+
+  
+
+Tato dokumentace shrnuje rozdělení práce, použité knihovny, popis metod, vlastních funkcí a konfiguračních proměnných. V případě dotazů nebo potřeby rozšíření dokumentace kontaktujte autory projektu.
+
+## Přílohy
+![ai-screen](https://github.com/user-attachments/assets/69242660-7f78-4339-bef3-f46833d0d816)
+![ai_screen_2](https://github.com/user-attachments/assets/0bd600cb-615d-47f9-ad4c-08d1edbd623f)
+![ai_screen_3](https://github.com/user-attachments/assets/53e36bd2-94c9-49d3-b7c3-43b6899c0129)
+![ai_screen_4](https://github.com/user-attachments/assets/7297081f-6ff6-46fd-b837-c2c07cd67632)
+
