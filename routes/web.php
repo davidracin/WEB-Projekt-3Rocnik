@@ -7,6 +7,7 @@ use App\Http\Controllers\PublicBookController; // Import the public book control
 use App\Http\Controllers\BooksController; // Import the books controller (admin)
 use App\Http\Controllers\ReviewController; // Import the review controller
 use App\Http\Controllers\PasswordResetController; // Import the password reset controller
+use App\Http\Controllers\DocumentationController; // Import the documentation controller
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,6 @@ Route::post('/admin/books/edit/{id}', [BooksController::class, 'editBook'])->mid
 Route::post('/books/{book}/reviews', [ReviewController::class, 'store'])->middleware('auth')->name('reviews.store');
 Route::put('/reviews/{review}', [ReviewController::class, 'update'])->middleware('auth')->name('reviews.update');
 Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->middleware('auth')->name('reviews.destroy');
+
+// Documentation route
+Route::get('/documentation', [DocumentationController::class, 'documentation'])->name('documentation');
