@@ -7,6 +7,7 @@ use App\Http\Controllers\PublicBookController; // Import the public book control
 use App\Http\Controllers\BooksController; // Import the books controller (admin)
 use App\Http\Controllers\ReviewController; // Import the review controller
 use App\Http\Controllers\PasswordResetController; // Import the password reset controller
+use App\Http\Controllers\BookFilterController; // Import the book filter controller
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,8 @@ Route::get('/books', [PublicBookController::class, 'index'])->name('books.index'
 Route::get('/books/search', [PublicBookController::class, 'search'])->name('books.search');
 Route::get('/books/genre/{id}', [PublicBookController::class, 'byGenre'])->name('books.by-genre');
 Route::get('/books/author/{id}', [PublicBookController::class, 'byAuthor'])->name('books.by-author');
+Route::get('/books/genre/{genreId}/author/{authorId}', [BookFilterController::class, 'byGenreAndAuthor'])->name('books.by-genre-author');
+Route::get('/api/genres/{genreId}/authors', [BookFilterController::class, 'getAuthorsByGenre'])->name('api.genres.authors');
 Route::get('/books/{id}', [PublicBookController::class, 'show'])->name('books.show');
 
 // Admin Book Management Routes 

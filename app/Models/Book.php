@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Book extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * The table associated with the model.
@@ -38,7 +39,7 @@ class Book extends Model
         'published_year',
         'pages',
         'ISBN',
-        'publishers_id',
+        'publisher_id',
         'publishing_cities_id'
     ];
 
@@ -69,7 +70,7 @@ class Book extends Model
      */
     public function publisher(): BelongsTo
     {
-        return $this->belongsTo(Publisher::class, 'publishers_id');
+        return $this->belongsTo(Publisher::class, 'publisher_id');
     }
 
     /**
