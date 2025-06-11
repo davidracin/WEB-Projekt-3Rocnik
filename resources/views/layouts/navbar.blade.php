@@ -10,6 +10,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('genre*') ? 'active' : '' }}" href="{{ route('genre') }}">Genres</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('documentation*') ? 'active' : '' }}" href="{{ route('documentation') }}">Dokumentace</a>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto d-flex flex-row">
                 <li class="nav-item">

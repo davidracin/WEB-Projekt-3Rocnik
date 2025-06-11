@@ -34,6 +34,11 @@
                             <i class="fas fa-tag me-1"></i> Žánry
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('documentation') ? 'active' : '' }}" href="{{ route('documentation') }}">
+                            <i class="fas fa-tag me-1"></i> Dokumentace
+                        </a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav">
                     @auth

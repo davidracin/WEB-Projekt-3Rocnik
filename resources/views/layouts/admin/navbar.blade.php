@@ -15,6 +15,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.books') ? 'active' : '' }}" href="{{ route('admin.books') }}">
+                        <i class="fas fa-tags me-1"></i> Knihy
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('genreAdmin') ? 'active' : '' }}" href="{{ route('genreAdmin') }}">
                         <i class="fas fa-tags me-1"></i> Žánry
                     </a>
