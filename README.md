@@ -171,23 +171,23 @@ Upraví existující žánr podle ID a nového názvu z požadavku. Pokud žánr
 ---
 ### PublicBookController
 
--  **index(Request $request): View**
+-  **index(Request $request)**
 
 Zobrazí hlavní stránku s výpisem knih, umožňuje filtrování podle žánru a řazení, stránkuje výsledky po 12 knihách.
 
--  **show($id): View**
+-  **show($id)**
 
 Zobrazí detail vybrané knihy včetně autorů, žánrů, nakladatele, města a země vydání a recenzí.
 
--  **byGenre($genreId): View**
+-  **byGenre($genreId)**
 
 Zobrazí knihy pouze z vybraného žánru, řazené podle roku vydání, stránkované po 12.
 
--  **byAuthor($authorId): View**
+-  **byAuthor($authorId)**
 
 Zobrazí knihy pouze od vybraného autora, řazené podle roku vydání, stránkované po 12.
 
--  **search(Request $request): View**
+-  **search(Request $request)**
 
 Vyhledává knihy podle názvu, popisu, autora, žánru nebo ISBN, výsledky řadí a stránkuje.
 
@@ -199,13 +199,13 @@ Pomocná metoda pro zpracování dat knih pro výpis ve view (hlavní i doporuč
 
 ### ReviewController
 
-- **store(Request $request, $bookId): RedirectResponse**  
+- **store(Request $request, $bookId)**  
   Uloží novou recenzi ke knize. Kontroluje přihlášení uživatele, validuje vstup, ověřuje, zda už uživatel recenzi nevložil, a ukládá recenzi do databáze.
 
-- **update(Request $request, $reviewId): RedirectResponse**  
+- **update(Request $request, $reviewId)**  
   Upraví existující recenzi. Kontroluje vlastnictví recenze, validuje vstup a aktualizuje recenzi v databázi.
 
-- **destroy($reviewId): RedirectResponse**  
+- **destroy($reviewId)**  
   Smaže recenzi. Kontroluje vlastnictví recenze nebo administrátorská práva a provede smazání recenze z databáze.
 
 ---
