@@ -121,7 +121,7 @@
                 </div>
 
                 <!-- Genres -->
-                <div class="mb-4">
+                <div class="mb-3">
                     <h5 class="text-muted">
                         <i class="fas fa-tags me-2"></i> Žánry
                     </h5>
@@ -135,6 +135,32 @@
                         @endforelse
                     </div>
                 </div>
+
+                <!-- Advanced filtering: Genre + Author combinations -->
+                @if($book->authors->isNotEmpty() && $book->genres->isNotEmpty())
+                <div class="mb-4">
+                    <h5 class="text-muted">
+                        <i class="fas fa-filter me-2"></i> Další knihy tohoto autora v těchto žánrech
+                    </h5>
+                    <div class="row g-2">
+                        @foreach($book->authors as $author)
+                            @foreach($book->genres as $genre)
+                            <div class="col-auto">
+                                <a href="{{ route('books.by-genre-author', ['genreId' => $genre->id, 'authorId' => $author->id]) }}" 
+                                   class="btn btn-sm btn-outline-info mb-1" 
+                                   title="Zobrazit všechny knihy od {{ $author->name }} v žánru {{ $genre->name }}">
+                                    <i class="fas fa-book me-1"></i>{{ $author->name }} - {{ $genre->name }}
+                                </a>
+                            </div>
+                            @endforeach
+                        @endforeach
+                    </div>
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Kliknutím zobrazíte všechny knihy konkrétního autora v daném žánru
+                    </small>
+                </div>
+                @endif
 
                 <!-- Description -->
                 <div>

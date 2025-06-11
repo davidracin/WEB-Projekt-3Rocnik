@@ -85,6 +85,41 @@
                     </div>
                 </div>
 
+                <!-- Advanced Filter: Genre + Author -->
+                <div class="mb-4">
+                    <h6 class="border-bottom pb-2 mb-3">
+                        <i class="fas fa-filter me-2"></i>Pokročilé filtrování
+                    </h6>
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <form id="advancedFilterForm">
+                                <div class="mb-3">
+                                    <label for="genreSelect" class="form-label small">Žánr:</label>
+                                    <select class="form-select form-select-sm" id="genreSelect">
+                                        <option value="">Vyberte žánr</option>
+                                        @foreach($genres as $genre)
+                                        <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="authorSelect" class="form-label small">Autor:</label>
+                                    <select class="form-select form-select-sm" id="authorSelect" disabled>
+                                        <option value="">Nejprve vyberte žánr</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-sm w-100" id="filterButton" disabled>
+                                    <i class="fas fa-search me-1"></i>Filtrovat
+                                </button>
+                            </form>
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Kombinace žánru a autora pro přesnější výsledky
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
 
                 <!-- Reset filters button -->
                 <div class="d-grid gap-2">
@@ -190,4 +225,70 @@
         </div>
         @endif
     </div>
-    @endsection
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const genreSelect = document.getElementById('genreSelect');
+    const authorSelect = document.getElementById('authorSelect');
+    const filterButton = document.getElementById('filterButton');
+    
+    genreSelect.addEventListener('change', function() {
+        const genreId = this.value;
+        authorSelect.innerHTML = '<option value="">Načítám autory...</option>';
+        
+        if (genreId) {
+            authorSelect.disabled = true;
+            
+            // Fetch authors for this genre
+            fetch(`/api/genres/${genreId}/authors`)
+                .then(response => response.json())
+                .then(authors => {
+                    authorSelect.innerHTML = '<option value="">Vyberte autora</option>';
+                    
+                    if (authors.length > 0) {
+                        authors.forEach(author => {
+                            const option = document.createElement('option');
+                            option.value = author.id;
+                            option.textContent = author.name;
+                            authorSelect.appendChild(option);
+                        });
+                        authorSelect.disabled = false;
+                    } else {
+                        authorSelect.innerHTML = '<option value="">V tomto žánru nejsou žádní autoři</option>';
+                        authorSelect.disabled = true;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching authors:', error);
+                    authorSelect.innerHTML = '<option value="">Chyba při načítání autorů</option>';
+                    authorSelect.disabled = true;
+                });
+        } else {
+            authorSelect.disabled = true;
+            authorSelect.innerHTML = '<option value="">Nejprve vyberte žánr</option>';
+        }
+        
+        updateFilterButton();
+    });
+    
+    authorSelect.addEventListener('change', updateFilterButton);
+    
+    function updateFilterButton() {
+        const genreId = genreSelect.value;
+        const authorId = authorSelect.value;
+        
+        if (genreId && authorId) {
+            filterButton.disabled = false;
+            filterButton.onclick = function() {
+                window.location.href = `/books/genre/${genreId}/author/${authorId}`;
+            };
+        } else {
+            filterButton.disabled = true;
+            filterButton.onclick = null;
+        }
+    }
+});
+</script>
+@endsection
