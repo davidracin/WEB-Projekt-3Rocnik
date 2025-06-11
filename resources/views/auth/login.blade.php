@@ -16,9 +16,9 @@
                 @csrf
 
                 <div class="form-floating mb-4">
-                  <input type="email" id="email" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email" />
-                  <label for="email">Email</label>
-                  @error('email')
+                  <input type="text" id="login" name="login" class="form-control form-control-lg @error('login') is-invalid @enderror" value="{{ old('login') }}" required autofocus placeholder="Email nebo jméno" />
+                  <label for="login">Email nebo jméno</label>
+                  @error('login')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
@@ -39,6 +39,10 @@
                 </div>
                 <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Přihlásit se</button>
               </form>
+
+              <div class="mt-3">
+                <a href="{{ route('password.request') }}" class="text-white-50">Zapomněli jste heslo?</a>
+              </div>
             </div>
 
             <div>

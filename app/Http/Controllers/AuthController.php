@@ -45,18 +45,26 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|string|email',
+            'login' => 'required|string', // Changed from 'email' to 'login'
             'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($credentials)) { // Attempt login with credentials
+        // Determine if the input is an email or name
+        $loginField = filter_var($credentials['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        
+        $loginCredentials = [
+            $loginField => $credentials['login'],
+            'password' => $credentials['password']
+        ];
+
+        if (Auth::attempt($loginCredentials)) { // Attempt login with credentials
             $request->session()->regenerate();
             return redirect()->intended('dashboard');
         }
 
         return back()->withErrors([
-            'email' => 'Neplatné přihlašovací údaje.',
-        ])->onlyInput('email');
+            'login' => 'Neplatné přihlašovací údaje.',
+        ])->onlyInput('login');
     }
 
     // Handle logout

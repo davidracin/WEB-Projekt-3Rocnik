@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController; // Import the auth controller
 use App\Http\Controllers\PublicBookController; // Import the public book controller
 use App\Http\Controllers\BooksController; // Import the books controller (admin)
 use App\Http\Controllers\ReviewController; // Import the review controller
+use App\Http\Controllers\PasswordResetController; // Import the password reset controller
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,12 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+
+// Password Reset Routes
+Route::get('/forgot-password', [PasswordResetController::class, 'showForgotPasswordForm'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [PasswordResetController::class, 'reset'])->name('password.update');
 
 // Public Book Routes (for visitors and users)
 Route::get('/books', [PublicBookController::class, 'index'])->name('books.index');
