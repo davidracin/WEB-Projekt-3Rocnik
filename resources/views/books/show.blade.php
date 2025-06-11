@@ -83,11 +83,11 @@
         <div class="card shadow-sm">
             <div class="card-body">
                 <h1 class="card-title mb-3">{{ $book->title }}</h1>
-                
+
                 <!-- Authors -->
                 <div class="mb-3">
                     <h5 class="text-muted">
-                        <i class="fas fa-user-edit me-2"></i> 
+                        <i class="fas fa-user-edit me-2"></i>
                         {{ $book->authors->count() > 1 ? 'Autoři' : 'Autor' }}
                     </h5>
                     <div>
@@ -155,7 +155,7 @@
             <div class="card-header bg-primary text-white">
                 <h3 class="mb-0">
                     <i class="fas fa-comments me-2"></i>
-                    Recenze 
+                    Recenze
                     @if(isset($totalReviews) && $totalReviews > 0)
                         <span class="badge bg-light text-dark">{{ $totalReviews }}</span>
                         @if(isset($averageRating) && $averageRating > 0)
@@ -246,7 +246,7 @@
                                     </button>
                                 </div>
                             </form>
-                            
+
                             <!-- Hidden delete form -->
                             <form id="delete-review-form-{{ $userReview->id }}" action="{{ route('reviews.destroy', $userReview->id) }}" method="POST" style="display: none;">
                                 @csrf
@@ -314,17 +314,17 @@
 
 @section('scripts')
 <!-- TinyMCE CDN -->
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/5dq16he46eydbqjp0c2occgwsc7ywynay2uq1w6lf9youklx/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Book show page loaded successfully');
-    
+
     // Initialize TinyMCE after a short delay to ensure Bootstrap is fully loaded
     setTimeout(function() {
         if (typeof tinymce !== 'undefined') {
             console.log('Initializing TinyMCE editor...');
-            
+
             tinymce.init({
                 selector: '.wysiwyg-editor',
                 height: 300,
@@ -332,8 +332,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 branding: false,
                 statusbar: false,
                 plugins: [
-                    'lists', 'link', 'charmap', 'preview', 'searchreplace', 
-                    'visualblocks', 'code', 'fullscreen', 'insertdatetime', 
+                    'lists', 'link', 'charmap', 'preview', 'searchreplace',
+                    'visualblocks', 'code', 'fullscreen', 'insertdatetime',
                     'help', 'wordcount', 'emoticons'
                 ],
                 toolbar: 'undo redo | formatselect | bold italic underline | ' +
@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Ensure TinyMCE doesn't interfere with Bootstrap
                 init_instance_callback: function (editor) {
                     console.log('TinyMCE editor initialized successfully');
-                    
+
                     // Ensure TinyMCE dialogs have lower z-index than Bootstrap navbar
                     editor.on('OpenWindow', function() {
                         setTimeout(function() {
@@ -377,12 +377,12 @@ document.addEventListener('DOMContentLoaded', function() {
             console.warn('TinyMCE not loaded, using plain textarea');
         }
     }, 300); // Wait 300ms for Bootstrap to fully initialize
-    
+
     // Ensure Bootstrap dropdowns still work (this runs before TinyMCE)
     setTimeout(function() {
         var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
         console.log('Found dropdown elements on book page:', dropdownElementList.length);
-        
+
         dropdownElementList.forEach(function (dropdownToggleEl) {
             if (!dropdownToggleEl.hasAttribute('data-bs-dropdown-page-initialized')) {
                 try {
@@ -395,18 +395,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, 100);
-    
+
     // Star Rating System
     initStarRating();
     initEditStarRating();
-    
+
     // Form validation
     const reviewForm = document.getElementById('review-form');
     if (reviewForm) {
         reviewForm.addEventListener('submit', function(e) {
             const ratingInput = document.getElementById('rating-input');
             const ratingError = document.getElementById('rating-error');
-            
+
             if (!ratingInput.value) {
                 e.preventDefault();
                 ratingError.classList.remove('d-none');
@@ -423,33 +423,33 @@ function initStarRating() {
     const starsContainer = document.getElementById('rating-stars');
     const ratingInput = document.getElementById('rating-input');
     const ratingError = document.getElementById('rating-error');
-    
+
     if (!starsContainer || !ratingInput) return;
-    
+
     const stars = starsContainer.querySelectorAll('.rating-star');
-    
+
     // Set initial state from old input
     const initialRating = parseInt(ratingInput.value) || 0;
     updateStarsDisplay(stars, initialRating);
-    
+
     stars.forEach((star, index) => {
         star.addEventListener('click', () => {
             const rating = parseInt(star.dataset.rating);
             ratingInput.value = rating;
             updateStarsDisplay(stars, rating);
-            
+
             // Hide error message when rating is selected
             if (ratingError) {
                 ratingError.classList.add('d-none');
             }
         });
-        
+
         star.addEventListener('mouseenter', () => {
             const rating = parseInt(star.dataset.rating);
             updateStarsDisplay(stars, rating, true);
         });
     });
-    
+
     starsContainer.addEventListener('mouseleave', () => {
         const currentRating = parseInt(ratingInput.value) || 0;
         updateStarsDisplay(stars, currentRating);
@@ -459,24 +459,24 @@ function initStarRating() {
 function initEditStarRating() {
     const starsContainer = document.getElementById('edit-rating-stars');
     const ratingInput = document.getElementById('edit-rating-input');
-    
+
     if (!starsContainer || !ratingInput) return;
-    
+
     const stars = starsContainer.querySelectorAll('.rating-star');
-    
+
     stars.forEach((star, index) => {
         star.addEventListener('click', () => {
             const rating = parseInt(star.dataset.rating);
             ratingInput.value = rating;
             updateStarsDisplay(stars, rating);
         });
-        
+
         star.addEventListener('mouseenter', () => {
             const rating = parseInt(star.dataset.rating);
             updateStarsDisplay(stars, rating, true);
         });
     });
-    
+
     starsContainer.addEventListener('mouseleave', () => {
         const currentRating = parseInt(ratingInput.value) || 0;
         updateStarsDisplay(stars, currentRating);
@@ -487,7 +487,7 @@ function updateStarsDisplay(stars, rating, isHover = false) {
     stars.forEach((star, index) => {
         const starRating = index + 1;
         star.classList.remove('fas', 'far', 'text-warning', 'text-muted');
-        
+
         if (starRating <= rating) {
             star.classList.add('fas', 'text-warning');
         } else {
