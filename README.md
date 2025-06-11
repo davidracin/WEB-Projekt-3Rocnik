@@ -9,7 +9,7 @@
 
   
 
-##  Rozdělení práce (what in the fuck)
+##  Rozdělení práce
 
   
 
@@ -55,7 +55,7 @@ Každý člen týmu měl jasně vymezenou oblast odpovědnosti. Spolupráce prob
 
   
 
-##  Citace použití AI (???)
+##  Citace použití AI
 
   
 
@@ -167,6 +167,48 @@ Přidá nový žánr na základě názvu z požadavku a uloží ho do databáze.
 -  **editGenre(Request $request)**
 
 Upraví existující žánr podle ID a nového názvu z požadavku. Pokud žánr existuje, aktualizuje ho a přesměruje zpět s úspěšnou hláškou, jinak vrátí chybu.
+
+---
+### PublicBookController
+
+-  **index(Request $request): View**
+
+Zobrazí hlavní stránku s výpisem knih, umožňuje filtrování podle žánru a řazení, stránkuje výsledky po 12 knihách.
+
+-  **show($id): View**
+
+Zobrazí detail vybrané knihy včetně autorů, žánrů, nakladatele, města a země vydání a recenzí.
+
+-  **byGenre($genreId): View**
+
+Zobrazí knihy pouze z vybraného žánru, řazené podle roku vydání, stránkované po 12.
+
+-  **byAuthor($authorId): View**
+
+Zobrazí knihy pouze od vybraného autora, řazené podle roku vydání, stránkované po 12.
+
+-  **search(Request $request): View**
+
+Vyhledává knihy podle názvu, popisu, autora, žánru nebo ISBN, výsledky řadí a stránkuje.
+
+-  **prepareBookData($books, $featuredBooks = null): array**
+
+Pomocná metoda pro zpracování dat knih pro výpis ve view (hlavní i doporučené knihy, stránkování).
+
+---
+
+### ReviewController
+
+- **store(Request $request, $bookId): RedirectResponse**  
+  Uloží novou recenzi ke knize. Kontroluje přihlášení uživatele, validuje vstup, ověřuje, zda už uživatel recenzi nevložil, a ukládá recenzi do databáze.
+
+- **update(Request $request, $reviewId): RedirectResponse**  
+  Upraví existující recenzi. Kontroluje vlastnictví recenze, validuje vstup a aktualizuje recenzi v databázi.
+
+- **destroy($reviewId): RedirectResponse**  
+  Smaže recenzi. Kontroluje vlastnictví recenze nebo administrátorská práva a provede smazání recenze z databáze.
+
+---
 
 ##  Popis vlastních knihoven a jejich metod
 
