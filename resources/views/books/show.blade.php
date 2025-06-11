@@ -36,7 +36,7 @@
     <!-- Book cover and key info -->
     <div class="col-md-4 mb-4">
         <div class="card shadow-sm">
-            <img src="{{ $book->cover_image }}" class="card-img-top book-detail-cover" alt="{{ $book->title }}">
+            <img src="{{ asset('storage/' . $book->cover_image) }}" class="card-img-top book-detail-cover" alt="{{ $book->title }}">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2 text-muted">Základní informace</h6>
                 <ul class="list-group list-group-flush">
